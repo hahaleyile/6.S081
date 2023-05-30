@@ -22,3 +22,9 @@ xv6.out*
 submissions/
 ph
 barrier
+compile_commands.json
+core
+time.txt
+.cache/
+.idea/
+.vscode/

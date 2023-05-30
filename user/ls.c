@@ -55,6 +55,7 @@ ls(char *path)
     p = buf+strlen(buf);
     *p++ = '/';
     while(read(fd, &de, sizeof(de)) == sizeof(de)){
+      // 8.11: Directory entries with inode number zero are free
       if(de.inum == 0)
         continue;
       memmove(p, de.name, DIRSIZ);
