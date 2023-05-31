@@ -22,3 +22,8 @@ xv6.out*
 submissions/
 ph
 barrier
+core
+.cache/
+.idea/
+.vscode/
+time.txt
