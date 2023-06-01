@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     int time;
     if (argc <= 1)
     {
-        fprintf(2, "usage: sleep time\n");
+        printf("usage: sleep time\n");
         exit(1);
     }
     time = atoi(argv[1]);

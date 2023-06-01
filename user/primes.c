@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
         // 并且是 fdalloc 返回了 -1
         // p[0] 是有值的，3，只有 dup 失败了
         // 发现原来是管道到达 fd 数量上限 NOFILE 了，所以无法创建出来
-        while (read(read_pipe, &num, 4) == 4)
+        while (read(read_pipe, &num, 4))
         {
             // printf("pipe id: %d\n",read_pipe);
             if (num % divisor == 0)
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
                 if (pid == 0)
                 {
                     // 不加这条会导致 fd 浪费
-                    // close(read_pipe);
+                    close(read_pipe);
                     read_pipe = dup(p[0]);
 
                     close(p[0]);
