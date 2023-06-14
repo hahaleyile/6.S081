@@ -122,6 +122,27 @@ walkaddr(pagetable_t pagetable, uint64 va)
   return pa;
 }
 
+uint16
+walkflags(pagetable_t pagetable, uint64 va)
+{
+  pte_t *pte;
+  uint16 flags;
+
+  if (va >= MAXVA)
+    return 0;
+  pte = walk(pagetable, va, 0);
+  if (pte == 0)
+    return 0;
+  if ((*pte & PTE_V) == 0)
+    return 0;
+  flags = PTE_FLAGS(*pte);
+  // access bit won't be set when read pte
+  // it will only be set when access contents in the page
+  if (*pte & PTE_A)
+    *pte = (*pte) & (~PTE_A);
+  return flags;
+}
+
 // add a mapping to the kernel page table.
 // only used when booting.
 // does not flush TLB or enable paging.
